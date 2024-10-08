@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	6.1.5
+%define		kdeplasmaver	6.2.0
 %define		qtver		5.15.2
 %define		kpname		kscreen
 Summary:	KDE's screen management software
 Name:		kp6-%{kpname}
-Version:	6.1.5
+Version:	6.2.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	197276c1fe2b6704ec011b5efff32c1b
+# Source0-md5:	1c9efff15d6325aee16665f7e092818e
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.16.0
@@ -23,6 +23,7 @@ BuildRequires:	kf6-kglobalaccel-devel
 BuildRequires:	kf6-ki18n-devel
 BuildRequires:	kf6-kwidgetsaddons-devel
 BuildRequires:	kf6-kxmlgui-devel
+BuildRequires:	kp6-libkscreen-devel >= %{version}
 BuildRequires:	ninja
 BuildRequires:	qt6-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
