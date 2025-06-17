@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	6.3.5
+%define		kdeplasmaver	6.4.0
 %define		qtver		5.15.2
 %define		kpname		kscreen
 Summary:	KDE's screen management software
 Name:		kp6-%{kpname}
-Version:	6.3.5
+Version:	6.4.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	50cdf2ecac31f07dfc306d5e0357136a
+# Source0-md5:	99ccc9540c529154856edb780771f56e
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.16.0
@@ -70,17 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kpname}.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/hdrcalibrator
 %attr(755,root,root) %{_bindir}/kscreen-console
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/kscreen.so
-%{_datadir}/metainfo/org.kde.kscreen.appdata.xml
-%dir %{_datadir}/plasma/plasmoids/org.kde.kscreen
-%dir %{_datadir}/plasma/plasmoids/org.kde.kscreen/contents
-%dir %{_datadir}/plasma/plasmoids/org.kde.kscreen/contents/ui
-%{_datadir}/plasma/plasmoids/org.kde.kscreen/contents/ui/InhibitionHint.qml
-%{_datadir}/plasma/plasmoids/org.kde.kscreen/contents/ui/PresentationModeItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.kscreen/contents/ui/ScreenLayoutSelection.qml
-%{_datadir}/plasma/plasmoids/org.kde.kscreen/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.kscreen/metadata.json
 %{_datadir}/qlogging-categories6/kscreen.categories
 %{systemduserunitdir}/plasma-kscreen-osd.service
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_kscreen.so
@@ -89,3 +81,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.kde.kscreen.osdService.service
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.kscreen.so
 %{_datadir}/kglobalaccel/org.kde.kscreen.desktop
+%{_datadir}/kscreen
