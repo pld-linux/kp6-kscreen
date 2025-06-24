@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	6.4.0
+%define		kdeplasmaver	6.4.1
 %define		qtver		5.15.2
 %define		kpname		kscreen
 Summary:	KDE's screen management software
 Name:		kp6-%{kpname}
-Version:	6.4.0
+Version:	6.4.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	99ccc9540c529154856edb780771f56e
+# Source0-md5:	4d1c1fb81d990799bb713fa241447017
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.16.0
@@ -29,12 +29,26 @@ BuildRequires:	qt6-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires(post,postun):	desktop-file-utils
+Requires:	%{name}-data = %{version}-%{release}
 Obsoletes:	kp5-%{kpname} < 6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 KDE's screen management software.
+
+%package data
+Summary:	Data files for %{kpname}
+Summary(pl.UTF-8):	Dane dla %{kpname}
+Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
+Obsoletes:	kp5-%{kpname}-data < 6
+BuildArch:	noarch
+
+%description data
+Data files for %{kpname}.
+
+%description data -l pl.UTF-8
+Dane dla %{kpname}.
 
 %prep
 %setup -q -n %{kpname}-%{version}
@@ -60,25 +74,26 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig
+%post data
 %update_desktop_database_post
 
-%postun
-/sbin/ldconfig
+%postun data
 %update_desktop_database_postun
 
-%files -f %{kpname}.lang
+%files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/hdrcalibrator
 %attr(755,root,root) %{_bindir}/kscreen-console
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/kscreen.so
-%{_datadir}/qlogging-categories6/kscreen.categories
-%{systemduserunitdir}/plasma-kscreen-osd.service
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_kscreen.so
 %attr(755,root,root) %{_prefix}/libexec/kscreen_osd_service
+%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.kscreen.so
+
+%files data -f %{kpname}.lang
+%defattr(644,root,root,755)
+%{_datadir}/qlogging-categories6/kscreen.categories
+%{systemduserunitdir}/plasma-kscreen-osd.service
 %{_desktopdir}/kcm_kscreen.desktop
 %{_datadir}/dbus-1/services/org.kde.kscreen.osdService.service
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.kscreen.so
 %{_datadir}/kglobalaccel/org.kde.kscreen.desktop
 %{_datadir}/kscreen
