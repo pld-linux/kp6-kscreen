@@ -55,6 +55,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 KDE's screen management software.
 
+%description -l pl.UTF-8
+Oprogramowanie do zarządzania ekranem dla KDE.
+
 %package data
 Summary:	Data files for %{kpname}
 Summary(pl.UTF-8):	Dane dla %{kpname}
