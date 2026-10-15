@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	6.7.5
+%define		kdeplasmaver	6.8.0
 %define		kframever	6.14.0
 %define		qtver		6.8.0
 %define		kpname		kscreen
 Summary:	KDE's screen management software
 Name:		kp6-%{kpname}
-Version:	6.7.5
+Version:	6.8.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	76abadd4e01c1b32eeb245a49db5ecb9
+# Source0-md5:	71f133eadf777b4323076bdcab7ae3e8
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6DBus-devel >= %{qtver}
@@ -106,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/hdrcalibrator
 %attr(755,root,root) %{_bindir}/kscreen-console
-%{_libdir}/qt6/plugins/kf6/kded/kscreen.so
+%attr(755,root,root) %{_bindir}/kscreenctl
 %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_kscreen.so
 %attr(755,root,root) %{_prefix}/libexec/kscreen_osd_service
 %{_libdir}/qt6/plugins/plasma/applets/org.kde.kscreen.so
@@ -118,3 +118,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kcm_kscreen.desktop
 %{_datadir}/dbus-1/services/org.kde.kscreen.osdService.service
 %{_datadir}/kglobalaccel/org.kde.kscreen.desktop
+%{fish_compdir}/kscreenctl.fish
+%{zsh_compdir}/_kscreenctl
